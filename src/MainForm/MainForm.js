@@ -1,46 +1,29 @@
 import React from "react";
-import Specs from '../MainForm/Specs/Specs'
-import Parts from '../MainForm/Parts/Parts'
-import slugify from "slugify";
+import Parts from "../MainForm/Parts/Parts";
+
 
 class MainForm extends React.Component {
 
-  features = () => {
-    return(
-      Object.keys(this.props.features).map((feature, idx) => {
-      const featureHash = feature + "-" + idx;
-      const options = this.props.features[feature].map((item, index) => {
-        const itemHash = slugify(JSON.stringify(item));
-        return (
-          <Specs 
-          key={index}
-          itemHash={itemHash}
-          feature={feature}
-          item={item}
-          selected={this.props.selected}
-          updateFeature={this.props.updateFeature}
-          USCurrencyFormat={this.props.USCurrencyFormat}
-          />
-        );
-      });
-
-      return (
-        <Parts
-        key={idx}
-        featureHash={featureHash}
-        feature={feature}
-        options={options}
-        />
-      );
-    })
-    )}
-
   render() {
-    return(
+    return (
       <div>
-        {this.features()}
+        {" "}
+        {Object.keys(this.props.features).map((feature, idx) => {
+          const featureHash = feature + "-" + idx;
+          return (
+            <Parts
+              key={idx}
+              featureHash={featureHash}
+              feature={feature}
+              features={this.props.features}
+              selected={this.props.selected}
+              updateFeature={this.props.updateFeature}
+              USCurrencyFormat={this.props.USCurrencyFormat}
+            />
+          );
+        })}
       </div>
-    )
+    );
   }
 }
 export default MainForm;
